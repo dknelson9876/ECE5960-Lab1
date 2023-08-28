@@ -35,11 +35,12 @@ void thread_entry(void) {
 	const struct device* dev;
 	dev = device_get_binding(LED1);
 	bool led_is_on = true;
-	int ret = gpio_pin_configure(dev, PIN0, GPIO_OUTPUT_ACTIVE | FLAGS0);
+	int ret = gpio_pin_configure(dev, PIN1, GPIO_OUTPUT_ACTIVE | FLAGS1);
 
 	struct k_timer t;
 	k_timer_init(&t, NULL, NULL);
 
+	//in an infinite loop, toggle LED1 then hold until the timer goes off again
 	while (1) {
 		counter = counter + 1;
 		gpio_pin_set(dev, PIN1, (int)led_is_on);
@@ -56,6 +57,7 @@ void main(void) {
 
 	dev = device_get_binding(LED0);
 
+	// starts a new thread and points it to the thread_entry function above
 	k_thread_create(&coop_thread,
 		coop_stack,
 		STACKSIZE,
@@ -76,6 +78,7 @@ void main(void) {
 		return;
 	}
 
+	// in an infinite loop, toggle LED0 then wait 500ms
 	while (1) {
 		gpio_pin_set(dev, PIN0, (int)led_is_on);
 		led_is_on = !led_is_on;
