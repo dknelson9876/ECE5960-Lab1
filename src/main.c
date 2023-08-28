@@ -85,3 +85,7 @@ void main(void) {
 		k_msleep(500);
 	}
 }
+
+void toggle_led(struct device *dev, gpio_pin_t pin, bool* state) {
+
+}
