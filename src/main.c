@@ -3,7 +3,7 @@
 #include <devicetree.h>
 //#include <drivers/gpio.h>
 
-#include "PracticeRefactor.h"
+#include <PracticeRefactor.h>
 
 struct k_thread coop_thread;
 K_THREAD_STACK_DEFINE(coop_stack, STACKSIZE);
