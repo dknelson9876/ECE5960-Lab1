@@ -1,30 +1,9 @@
 #include <zephyr.h>
 #include <device.h>
 #include <devicetree.h>
-#include <drivers/gpio.h>
+//#include <drivers/gpio.h>
 
-#define LED0_NODE DT_ALIAS(led0)
-#define LED1_NODE DT_ALIAS(led1)
-
-#if DT_NODE_HAS_STATUS(LED1_NODE, okay)
-#define LED0	DT_GPIO_LABEL(LED0_NODE, gpios)
-#define PIN0	DT_GPIO_PIN(LED0_NODE, gpios)
-#define FLAGS0	DT_GPIO_FLAGS(LED0_NODE, gpios)
-#define LED1	DT_GPIO_LABEL(LED1_NODE, gpios)
-#define PIN1	DT_GPIO_PIN(LED1_NODE, gpios)
-#define FLAGS1	DT_GPIO_FLAGS(LED1_NODE, gpios)
-#else
-/* A build error here means your board isn't set up to blink an LED. */
-#error "Unsupported board: led0 devicetree alias is not defined"
-#define LED0	""
-#define PIN0	0
-#define FLAGS0	0
-#define LED1	""
-#define PIN1	0
-#define FLAGS1	0
-#endif
-
-#define STACKSIZE 2000
+#include "PracticeRefactor.h"
 
 struct k_thread coop_thread;
 K_THREAD_STACK_DEFINE(coop_stack, STACKSIZE);
@@ -42,11 +21,14 @@ void thread_entry(void) {
 
 	//in an infinite loop, toggle LED1 then hold until the timer goes off again
 	while (1) {
+		/*
 		counter = counter + 1;
 		gpio_pin_set(dev, PIN1, (int)led_is_on);
 		led_is_on = !led_is_on;
 		k_timer_start(&t, K_MSEC(2000), K_NO_WAIT);
 		k_timer_status_sync(&t);
+		*/
+		toggle_thread_led(dev, PIN1, &led_is_on, &t, &counter);
 	}
 }
 
@@ -80,12 +62,15 @@ void main(void) {
 
 	// in an infinite loop, toggle LED0 then wait 500ms
 	while (1) {
+		/*
 		gpio_pin_set(dev, PIN0, (int)led_is_on);
 		led_is_on = !led_is_on;
 		k_msleep(500);
+		*/
+		toggle_led(dev, PIN0, &led_is_on);
 	}
 }
 
-void toggle_led(struct device *dev, gpio_pin_t pin, bool* state) {
+//void toggle_led(struct device *dev, gpio_pin_t pin, bool* state) {
 
-}
+//}
