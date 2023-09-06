@@ -27,8 +27,8 @@
 #define STACKSIZE 2000
 
 
-void toggle_led(const struct device *dev, gpio_pin_t pin, bool* state);
-void toggle_thread_led(const struct device *dev, gpio_pin_t pin, bool* state, struct k_timer *tim,
-                                int *count);
+void toggle_led(const struct device* dev, gpio_pin_t pin, bool* state);
+void toggle_thread_led(const struct device* dev, gpio_pin_t pin, bool* state,
+    int* count);
 
 #endif

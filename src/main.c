@@ -28,7 +28,9 @@ void thread_entry(void) {
 		k_timer_start(&t, K_MSEC(2000), K_NO_WAIT);
 		k_timer_status_sync(&t);
 		*/
-		toggle_thread_led(dev, PIN1, &led_is_on, &t, &counter);
+		toggle_thread_led(dev, PIN1, &led_is_on, &counter);
+		k_timer_start(&t, K_MSEC(2000), K_NO_WAIT);
+		k_timer_status_sync(&t);
 	}
 }
 
@@ -68,6 +70,7 @@ void main(void) {
 		k_msleep(500);
 		*/
 		toggle_led(dev, PIN0, &led_is_on);
+		k_msleep(500);
 	}
 }
 

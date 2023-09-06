@@ -30,10 +30,10 @@ extern "C"
 {
 #endif
 
-void unityOutputStart();
-void unityOutputChar(char);
-void unityOutputFlush();
-void unityOutputComplete();
+    void unityOutputStart();
+    void unityOutputChar(char);
+    void unityOutputFlush();
+    void unityOutputComplete();
 
 #define UNITY_OUTPUT_START()    unityOutputStart()
 #define UNITY_OUTPUT_CHAR(c)    unityOutputChar(c)
