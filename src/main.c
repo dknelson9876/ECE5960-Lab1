@@ -21,13 +21,6 @@ void thread_entry(void) {
 
 	//in an infinite loop, toggle LED1 then hold until the timer goes off again
 	while (1) {
-		/*
-		counter = counter + 1;
-		gpio_pin_set(dev, PIN1, (int)led_is_on);
-		led_is_on = !led_is_on;
-		k_timer_start(&t, K_MSEC(2000), K_NO_WAIT);
-		k_timer_status_sync(&t);
-		*/
 		toggle_thread_led(dev, PIN1, &led_is_on, &counter);
 		k_timer_start(&t, K_MSEC(2000), K_NO_WAIT);
 		k_timer_status_sync(&t);
@@ -64,16 +57,7 @@ void main(void) {
 
 	// in an infinite loop, toggle LED0 then wait 500ms
 	while (1) {
-		/*
-		gpio_pin_set(dev, PIN0, (int)led_is_on);
-		led_is_on = !led_is_on;
-		k_msleep(500);
-		*/
 		toggle_led(dev, PIN0, &led_is_on);
 		k_msleep(500);
 	}
 }
-
-//void toggle_led(struct device *dev, gpio_pin_t pin, bool* state) {
-
-//}
